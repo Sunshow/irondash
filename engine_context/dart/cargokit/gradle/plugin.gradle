@@ -111,7 +111,7 @@ class CargoKitPlugin implements Plugin<Project> {
 
         def cargoBuildDir = "${project.buildDir}/build"
 
-        plugin.project.rootProject.android.applicationVariants.all { variant ->
+        plugin.project.android.libraryVariants.all { variant ->
 
             final buildType = variant.buildType.name
 
@@ -136,7 +136,7 @@ class CargoKitPlugin implements Plugin<Project> {
                     return
                 }
 
-                if (plugin.project.rootProject.android.ndkVersion == null) {
+                if (plugin.project.android.ndkVersion == null) {
                     throw new GradleException("Please set 'android.ndkVersion' in 'app/build.gradle'.")
                 }
 
@@ -144,10 +144,10 @@ class CargoKitPlugin implements Plugin<Project> {
                     buildMode = variant.buildType.name
                     buildDir = cargoBuildDir
                     outputDir = cargoOutputDir
-                    ndkVersion = plugin.project.rootProject.android.ndkVersion
-                    sdkDirectory = plugin.project.rootProject.android.sdkDirectory
-                    minSdkVersion = plugin.project.rootProject.android.defaultConfig.minSdkVersion.apiLevel as int
-                    compileSdkVersion = plugin.project.rootProject.android.compileSdkVersion.substring(8) as int
+                    ndkVersion = plugin.project.android.ndkVersion
+                    sdkDirectory = plugin.project.android.sdkDirectory
+                    minSdkVersion = plugin.project.android.defaultConfig.minSdkVersion.apiLevel as int
+                    compileSdkVersion = plugin.project.android.compileSdkVersion.substring(8) as int
                     targetPlatforms = platforms
                     pluginFile = CargoKitPlugin.file
                 }
